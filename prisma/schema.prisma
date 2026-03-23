@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Game {
+  id        String     @id @default(uuid())
+  homeTeam  String
+  awayTeam  String
+  oddsHome  Float
+  oddsDraw  Float
+  oddsAway  Float
+  status    GameStatus @default(OPEN)
+  startsAt  DateTime
+  createdAt DateTime   @default(now())
+}
+
+enum GameStatus {
+  OPEN
+  IN_PROGRESS
+  FINISHED
+  CANCELLED
+}
+
