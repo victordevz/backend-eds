@@ -14,7 +14,7 @@ app.register(swagger, {
     openapi: '3.0.0',
     info: {
       title: 'EDS Apostas API',
-      description: 'Backend da casa de apostas EDS — hackathon',
+      description: 'Backend Esporte da Sorte — hackathon',
       version: '1.0.0',
     },
     tags: [
