@@ -1,9 +1,29 @@
 import type { FastifyInstance } from 'fastify'
 import { registerSchema, loginSchema } from '../schemas/auth.schema'
 import { createUser, verifyCredentials } from '../services/auth.service'
+import { TokenResponseSchema, ErrorSchema } from '../schemas/openapi.schemas'
 
 export default async function authRoutes(app: FastifyInstance) {
-  app.post('/register', async (request, reply) => {
+  app.post('/register', {
+    schema: {
+      tags: ['Auth'],
+      summary: 'Criar nova conta',
+      body: {
+        type: 'object',
+        required: ['email', 'password'],
+        properties: {
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string', minLength: 8 },
+        },
+      },
+      response: {
+        201: TokenResponseSchema,
+        400: ErrorSchema,
+        409: ErrorSchema,
+        500: ErrorSchema,
+      },
+    },
+  }, async (request, reply) => {
     const result = registerSchema.safeParse(request.body)
     if (!result.success) {
       return reply.status(400).send({ error: 'VALIDATION_ERROR', details: result.error.issues })
@@ -21,7 +41,26 @@ export default async function authRoutes(app: FastifyInstance) {
     }
   })
 
-  app.post('/login', async (request, reply) => {
+  app.post('/login', {
+    schema: {
+      tags: ['Auth'],
+      summary: 'Entrar com email e senha',
+      body: {
+        type: 'object',
+        required: ['email', 'password'],
+        properties: {
+          email: { type: 'string', format: 'email' },
+          password: { type: 'string', minLength: 1 },
+        },
+      },
+      response: {
+        200: TokenResponseSchema,
+        400: ErrorSchema,
+        401: ErrorSchema,
+        500: ErrorSchema,
+      },
+    },
+  }, async (request, reply) => {
     const result = loginSchema.safeParse(request.body)
     if (!result.success) {
       return reply.status(400).send({ error: 'VALIDATION_ERROR', details: result.error.issues })
