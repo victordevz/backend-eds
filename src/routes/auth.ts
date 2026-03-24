@@ -37,6 +37,7 @@ export default async function authRoutes(app: FastifyInstance) {
       if (err instanceof Error && err.message === 'EMAIL_TAKEN') {
         return reply.status(409).send({ error: 'EMAIL_TAKEN' })
       }
+      app.log.error(err)
       return reply.status(500).send({ error: 'INTERNAL_ERROR' })
     }
   })
@@ -74,6 +75,7 @@ export default async function authRoutes(app: FastifyInstance) {
       if (err instanceof Error && err.message === 'INVALID_CREDENTIALS') {
         return reply.status(401).send({ error: 'INVALID_CREDENTIALS' })
       }
+      app.log.error(err)
       return reply.status(500).send({ error: 'INTERNAL_ERROR' })
     }
   })

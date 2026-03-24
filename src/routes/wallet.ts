@@ -34,6 +34,7 @@ export default async function walletRoutes(app: FastifyInstance) {
       if (err instanceof Error && err.message === 'INVALID_AMOUNT') {
         return reply.status(400).send({ error: 'INVALID_AMOUNT' })
       }
+      app.log.error(err)
       return reply.status(500).send({ error: 'INTERNAL_ERROR' })
     }
   })
@@ -68,6 +69,7 @@ export default async function walletRoutes(app: FastifyInstance) {
       if (err instanceof Error && err.message === 'DEPOSIT_NOT_FOUND') {
         return reply.status(404).send({ error: 'DEPOSIT_NOT_FOUND' })
       }
+      app.log.error(err)
       return reply.status(500).send({ error: 'INTERNAL_ERROR' })
     }
   })
