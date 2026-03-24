@@ -1,0 +1,50 @@
+-- CreateEnum
+CREATE TYPE "DepositStatus" AS ENUM ('PENDING', 'COMPLETED');
+
+-- CreateEnum
+CREATE TYPE "GameStatus" AS ENUM ('OPEN', 'IN_PROGRESS', 'FINISHED', 'CANCELLED');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "passwordHash" TEXT NOT NULL,
+    "balance" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Deposit" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "amount" DOUBLE PRECISION NOT NULL,
+    "status" "DepositStatus" NOT NULL DEFAULT 'PENDING',
+    "pixCode" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "completedAt" TIMESTAMP(3),
+
+    CONSTRAINT "Deposit_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Game" (
+    "id" TEXT NOT NULL,
+    "homeTeam" TEXT NOT NULL,
+    "awayTeam" TEXT NOT NULL,
+    "oddsHome" DOUBLE PRECISION NOT NULL,
+    "oddsDraw" DOUBLE PRECISION NOT NULL,
+    "oddsAway" DOUBLE PRECISION NOT NULL,
+    "status" "GameStatus" NOT NULL DEFAULT 'OPEN',
+    "startsAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Game_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- AddForeignKey
+ALTER TABLE "Deposit" ADD CONSTRAINT "Deposit_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

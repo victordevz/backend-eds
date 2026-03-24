@@ -26,3 +26,16 @@ export const ErrorSchema = {
     error: { type: 'string' },
   },
 } as const
+
+export const DepositSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'string', format: 'uuid' },
+    userId: { type: 'string', format: 'uuid' },
+    amount: { type: 'number' },
+    status: { type: 'string', enum: ['PENDING', 'COMPLETED'] },
+    pixCode: { type: 'string' },
+    createdAt: { type: 'string', format: 'date-time' },
+    completedAt: { type: 'string', format: 'date-time', nullable: true },
+  },
+} as const
