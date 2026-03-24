@@ -27,6 +27,13 @@ export const ErrorSchema = {
   },
 } as const
 
+export const BalanceSchema = {
+  type: 'object',
+  properties: {
+    balance: { type: 'number' },
+  },
+} as const
+
 export const DepositSchema = {
   type: 'object',
   properties: {

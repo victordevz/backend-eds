@@ -42,3 +42,14 @@ export async function getDeposit(depositId: string, userId: string) {
   }
   return deposit
 }
+
+export async function getBalance(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { balance: true },
+  })
+  if (!user) {
+    throw new Error('USER_NOT_FOUND')
+  }
+  return user
+}

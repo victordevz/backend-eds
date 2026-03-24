@@ -1,9 +1,36 @@
 import type { FastifyInstance } from 'fastify'
 import { authenticate } from '../hooks/authenticate'
-import { createDeposit, getDeposit } from '../services/wallet.service'
-import { DepositSchema, ErrorSchema } from '../schemas/openapi.schemas'
+import { createDeposit, getDeposit, getBalance } from '../services/wallet.service'
+import { BalanceSchema, DepositSchema, ErrorSchema } from '../schemas/openapi.schemas'
 
 export default async function walletRoutes(app: FastifyInstance) {
+  app.get('/balance', {
+    onRequest: [authenticate],
+    schema: {
+      tags: ['Wallet'],
+      summary: 'Consultar saldo disponível',
+      security: [{ bearerAuth: [] }],
+      response: {
+        200: BalanceSchema,
+        404: ErrorSchema,
+        500: ErrorSchema,
+      },
+    },
+  }, async (request, reply) => {
+    const { sub: userId } = request.user as { sub: string }
+
+    try {
+      const { balance } = await getBalance(userId)
+      return reply.send({ balance })
+    } catch (err: unknown) {
+      if (err instanceof Error && err.message === 'USER_NOT_FOUND') {
+        return reply.status(404).send({ error: 'USER_NOT_FOUND' })
+      }
+      app.log.error(err)
+      return reply.status(500).send({ error: 'INTERNAL_ERROR' })
+    }
+  })
+
   app.post('/deposits', {
     onRequest: [authenticate],
     schema: {
