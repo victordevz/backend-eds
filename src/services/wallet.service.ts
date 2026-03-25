@@ -17,7 +17,7 @@ export async function createDeposit(userId: string, amount: number) {
     },
   })
 
-  setTimeout(() => confirmDeposit(deposit.id, userId, amount), 5000)
+  setTimeout(() => confirmDeposit(deposit.id, userId, amount), 2000)
 
   return deposit
 }
