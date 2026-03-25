@@ -50,3 +50,24 @@ enum GameStatus {
   CANCELLED
 }
 
+model CasinoGame {
+  id         String       @id @default(uuid())
+  title      String
+  provider   String
+  category   GameCategory
+  sections   String[]
+  badge      String?
+  multiplier String?
+  accent     String?
+  thumbnail  String?
+  active     Boolean      @default(true)
+  createdAt  DateTime     @default(now())
+}
+
+enum GameCategory {
+  SLOTS
+  CRASH
+  ROULETTE
+  BLACKJACK
+}
+
