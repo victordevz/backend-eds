@@ -7,6 +7,7 @@ import jwtPlugin from './plugins/jwt'
 import authRoutes from './routes/auth'
 import gamesRoutes from './routes/games'
 import walletRoutes from './routes/wallet'
+import catalogRoutes from './routes/catalog'
 
 const app = Fastify({ logger: true })
 
@@ -22,6 +23,7 @@ app.register(swagger, {
       { name: 'Auth', description: 'Registro e login de usuários' },
       { name: 'Games', description: 'Listagem pública de jogos disponíveis' },
       { name: 'Wallet', description: 'Depósitos via PIX simulado' },
+      { name: 'Catalog', description: 'Catálogo de jogos do cassino' },
     ],
     components: {
       securitySchemes: {
@@ -49,6 +51,7 @@ app.register(jwtPlugin)
 app.register(authRoutes, { prefix: '/auth' })
 app.register(gamesRoutes, { prefix: '/games' })
 app.register(walletRoutes, { prefix: '/wallet' })
+app.register(catalogRoutes, { prefix: '/catalog' })
 
 app.get('/openapi.json', { schema: { hide: true } }, async () => app.swagger())
 
