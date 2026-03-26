@@ -61,6 +61,8 @@ model CasinoGame {
   multiplier String?
   accent     String?
   thumbnail  String?
+  gameUrl    String
+  imageUrl   String?
   active     Boolean      @default(true)
   createdAt  DateTime     @default(now())
 }

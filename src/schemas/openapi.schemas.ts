@@ -58,7 +58,8 @@ export const CasinoGameSchema = {
     badge: { type: 'string', nullable: true },
     multiplier: { type: 'string', nullable: true },
     accent: { type: 'string', nullable: true },
-    thumbnail: { type: 'string', nullable: true },
+    gameUrl: { type: 'string' },
+    imageUrl: { type: 'string', nullable: true },
     active: { type: 'boolean' },
     createdAt: { type: 'string', format: 'date-time' },
   },
@@ -91,4 +92,34 @@ export const StorySchema = {
 export const StoryListSchema = {
   type: 'array',
   items: StorySchema,
+} as const
+
+export const SupportSessionSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'string', format: 'uuid' },
+    userId: { type: 'string', format: 'uuid' },
+    createdAt: { type: 'string', format: 'date-time' },
+  },
+} as const
+
+export const SupportSessionListSchema = {
+  type: 'array',
+  items: SupportSessionSchema,
+} as const
+
+export const SupportMessageSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'string', format: 'uuid' },
+    sessionId: { type: 'string', format: 'uuid' },
+    role: { type: 'string', enum: ['USER', 'ASSISTANT'] },
+    content: { type: 'string' },
+    createdAt: { type: 'string', format: 'date-time' },
+  },
+} as const
+
+export const SupportMessageListSchema = {
+  type: 'array',
+  items: SupportMessageSchema,
 } as const
