@@ -7,13 +7,14 @@ datasource db {
 }
 
 model User {
-  id           String       @id @default(uuid())
-  email        String       @unique
-  passwordHash String
-  balance      Float        @default(0)
-  createdAt    DateTime     @default(now())
-  deposits     Deposit[]
-  storyViews   StoryView[]
+  id               String           @id @default(uuid())
+  email            String           @unique
+  passwordHash     String
+  balance          Float            @default(0)
+  createdAt        DateTime         @default(now())
+  deposits         Deposit[]
+  storyViews       StoryView[]
+  supportSessions  SupportSession[]
 }
 
 model Deposit {
@@ -94,4 +95,26 @@ model StoryView {
   viewedAt DateTime @default(now())
 
   @@unique([storyId, userId])
+}
+
+model SupportSession {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id])
+  createdAt DateTime         @default(now())
+  messages  SupportMessage[]
+}
+
+model SupportMessage {
+  id        String          @id @default(uuid())
+  sessionId String
+  session   SupportSession  @relation(fields: [sessionId], references: [id])
+  role      MessageRole
+  content   String
+  createdAt DateTime        @default(now())
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
 }
