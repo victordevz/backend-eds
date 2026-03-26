@@ -8,6 +8,7 @@ import authRoutes from './routes/auth'
 import gamesRoutes from './routes/games'
 import walletRoutes from './routes/wallet'
 import catalogRoutes from './routes/catalog'
+import storiesRoutes from './routes/stories'
 
 const app = Fastify({ logger: true })
 
@@ -24,6 +25,7 @@ app.register(swagger, {
       { name: 'Games', description: 'Listagem pública de jogos disponíveis' },
       { name: 'Wallet', description: 'Depósitos via PIX simulado' },
       { name: 'Catalog', description: 'Catálogo de jogos do cassino' },
+      { name: 'Stories', description: 'Stories promocionais em vídeo' },
     ],
     components: {
       securitySchemes: {
@@ -52,6 +54,7 @@ app.register(authRoutes, { prefix: '/auth' })
 app.register(gamesRoutes, { prefix: '/games' })
 app.register(walletRoutes, { prefix: '/wallet' })
 app.register(catalogRoutes, { prefix: '/catalog' })
+app.register(storiesRoutes, { prefix: '/stories' })
 
 app.get('/openapi.json', { schema: { hide: true } }, async () => app.swagger())
 

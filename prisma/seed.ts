@@ -236,8 +236,41 @@ async function main() {
     ],
     skipDuplicates: true,
   })
+
+  await prisma.story.createMany({
+    data: [
+      {
+        title: '1 MILHÃO',
+        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.47.54.mp4',
+        order: 1,
+      },
+      {
+        title: 'COTAÇÕES',
+        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.03.mp4',
+        order: 2,
+      },
+      {
+        title: 'PRÊMIOS',
+        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.22.mp4',
+        order: 3,
+      },
+      {
+        title: 'CASHBACK',
+        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.23.mp4',
+        order: 4,
+      },
+      {
+        title: 'GRÁTIS',
+        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.50.15.mp4',
+        order: 5,
+      },
+    ],
+    skipDuplicates: true,
+  })
 }
 
 main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect())
   .catch(console.error)
   .finally(() => prisma.$disconnect())

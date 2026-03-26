@@ -73,3 +73,22 @@ export const CasinoGameListSchema = {
     limit: { type: 'integer' },
   },
 } as const
+
+export const StorySchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'string', format: 'uuid' },
+    title: { type: 'string' },
+    videoUrl: { type: 'string' },
+    thumbnailUrl: { type: 'string', nullable: true },
+    order: { type: 'integer' },
+    active: { type: 'boolean' },
+    createdAt: { type: 'string', format: 'date-time' },
+    viewed: { type: 'boolean' },
+  },
+} as const
+
+export const StoryListSchema = {
+  type: 'array',
+  items: StorySchema,
+} as const
