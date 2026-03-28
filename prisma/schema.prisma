@@ -54,7 +54,7 @@ enum GameStatus {
 
 model CasinoGame {
   id         String       @id @default(uuid())
-  title      String
+  title      String       @unique
   provider   String
   category   GameCategory
   sections   String[]

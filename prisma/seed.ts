@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, GameCategory } from '@prisma/client'
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
 const prisma = new PrismaClient({ adapter })
@@ -57,200 +57,194 @@ async function main() {
     skipDuplicates: true,
   })
 
-  await prisma.casinoGame.deleteMany({})
+  const casinoGames = [
+    {
+      title: 'Gates of Olympus',
+      provider: 'Pragmatic Play',
+      category: GameCategory.SLOTS,
+      sections: ['featured', 'popular'],
+      badge: 'HOT',
+      multiplier: '5000x',
+      accent: '#3A86FF',
+      gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20olympgate&lang=pt&cur=BRL&lobbyUrl=about:blank',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Sweet Bonanza',
+      provider: 'Pragmatic Play',
+      category: GameCategory.SLOTS,
+      sections: ['featured', 'popular'],
+      badge: 'HOT',
+      multiplier: '21100x',
+      accent: '#FB5607',
+      gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20fruitsw&lang=pt&cur=BRL&lobbyUrl=about:blank',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Sugar Rush',
+      provider: 'Pragmatic Play',
+      category: GameCategory.SLOTS,
+      sections: ['popular', 'new'],
+      badge: 'NOVO',
+      multiplier: '5000x',
+      accent: '#FF006E',
+      gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20sugarrush&lang=pt&cur=BRL&lobbyUrl=about:blank',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Starlight Princess',
+      provider: 'Pragmatic Play',
+      category: GameCategory.SLOTS,
+      sections: ['popular'],
+      badge: null,
+      multiplier: '5000x',
+      accent: '#8338EC',
+      gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20starlight&lang=pt&cur=BRL&lobbyUrl=about:blank',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Big Bass Bonanza',
+      provider: 'Pragmatic Play',
+      category: GameCategory.SLOTS,
+      sections: ['popular'],
+      badge: null,
+      multiplier: '2100x',
+      accent: '#0077B6',
+      gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs10bbbonanza&lang=pt&cur=BRL&lobbyUrl=about:blank',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Fortune Tiger',
+      provider: 'PG Soft',
+      category: GameCategory.SLOTS,
+      sections: ['featured', 'popular'],
+      badge: 'HOT',
+      multiplier: '2500x',
+      accent: '#FF6B00',
+      gameUrl: 'https://m.pgsoft-games.com/44/index.html?l=pt&ot=98&btt=2&from=https%3A%2F%2Fpgsoft.com&__refer=m.pgsoft-games.com&or=static.pgsoft-games.com',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Mahjong Ways',
+      provider: 'PG Soft',
+      category: GameCategory.SLOTS,
+      sections: ['popular'],
+      badge: null,
+      multiplier: '1500x',
+      accent: '#E63946',
+      gameUrl: 'https://m.pgsoft-games.com/50/index.html?l=pt&ot=98&btt=2&from=https%3A%2F%2Fpgsoft.com&__refer=m.pgsoft-games.com&or=static.pgsoft-games.com',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Fortune Mouse',
+      provider: 'PG Soft',
+      category: GameCategory.SLOTS,
+      sections: ['featured', 'new'],
+      badge: 'NOVO',
+      multiplier: '1000x',
+      accent: '#FFD60A',
+      gameUrl: 'https://m.pgsoft-games.com/53/index.html?l=pt&ot=98&btt=2&from=https%3A%2F%2Fpgsoft.com&__refer=m.pgsoft-games.com&or=static.pgsoft-games.com',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Wild Bandito',
+      provider: 'PG Soft',
+      category: GameCategory.SLOTS,
+      sections: ['popular'],
+      badge: null,
+      multiplier: '2500x',
+      accent: '#FF6B35',
+      gameUrl: 'https://m.pgsoft-games.com/92/index.html?l=pt&ot=98&btt=2&from=https%3A%2F%2Fpgsoft.com&__refer=m.pgsoft-games.com&or=static.pgsoft-games.com',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Leprechaun Riches',
+      provider: 'PG Soft',
+      category: GameCategory.SLOTS,
+      sections: ['new'],
+      badge: 'NOVO',
+      multiplier: '2000x',
+      accent: '#2DC653',
+      gameUrl: 'https://m.pgsoft-games.com/45/index.html?l=pt&ot=98&btt=2&from=https%3A%2F%2Fpgsoft.com&__refer=m.pgsoft-games.com&or=static.pgsoft-games.com',
+      imageUrl: null,
+      active: true,
+    },
+    {
+      title: 'Candy Superwin',
+      provider: 'PG Soft',
+      category: GameCategory.SLOTS,
+      sections: ['new'],
+      badge: 'NOVO',
+      multiplier: '3000x',
+      accent: '#FF85A1',
+      gameUrl: 'https://m.pgsoft-games.com/91/index.html?l=pt&ot=98&btt=2&from=https%3A%2F%2Fpgsoft.com&__refer=m.pgsoft-games.com&or=static.pgsoft-games.com',
+      imageUrl: null,
+      active: true,
+    },
+  ]
 
-  await prisma.casinoGame.createMany({
-    data: [
-      {
-        title: 'Gates of Olympus',
-        provider: 'Pragmatic Play',
-        category: 'SLOTS',
-        sections: ['featured', 'popular'],
-        badge: 'HOT',
-        multiplier: '5000x',
-        accent: '#3A86FF',
-        gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20olympgate&lang=pt&cur=BRL&lobbyUrl=about:blank',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Sweet Bonanza',
-        provider: 'Pragmatic Play',
-        category: 'SLOTS',
-        sections: ['featured', 'popular'],
-        badge: 'HOT',
-        multiplier: '21100x',
-        accent: '#FB5607',
-        gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20fruitsw&lang=pt&cur=BRL&lobbyUrl=about:blank',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Sugar Rush',
-        provider: 'Pragmatic Play',
-        category: 'SLOTS',
-        sections: ['popular', 'new'],
-        badge: 'NOVO',
-        multiplier: '5000x',
-        accent: '#FF006E',
-        gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20sugarrush&lang=pt&cur=BRL&lobbyUrl=about:blank',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Starlight Princess',
-        provider: 'Pragmatic Play',
-        category: 'SLOTS',
-        sections: ['popular'],
-        badge: null,
-        multiplier: '5000x',
-        accent: '#8338EC',
-        gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs20starlight&lang=pt&cur=BRL&lobbyUrl=about:blank',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Big Bass Bonanza',
-        provider: 'Pragmatic Play',
-        category: 'SLOTS',
-        sections: ['popular'],
-        badge: null,
-        multiplier: '2100x',
-        accent: '#0077B6',
-        gameUrl: 'https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol=vs10bbbonanza&lang=pt&cur=BRL&lobbyUrl=about:blank',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Mahjong Ways',
-        provider: 'PG Soft',
-        category: 'SLOTS',
-        sections: ['popular'],
-        badge: null,
-        multiplier: '1500x',
-        accent: '#E63946',
-        gameUrl: 'https://public.pg-demo.com/games/play/?gid=50&lang=pt&currency=BRL',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Fortune Mouse',
-        provider: 'PG Soft',
-        category: 'SLOTS',
-        sections: ['featured', 'new'],
-        badge: 'NOVO',
-        multiplier: '1000x',
-        accent: '#FFD60A',
-        gameUrl: 'https://public.pg-demo.com/games/play/?gid=53&lang=pt&currency=BRL',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Wild Bandito',
-        provider: 'PG Soft',
-        category: 'SLOTS',
-        sections: ['popular'],
-        badge: null,
-        multiplier: '2500x',
-        accent: '#FF6B35',
-        gameUrl: 'https://public.pg-demo.com/games/play/?gid=92&lang=pt&currency=BRL',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Leprechaun Riches',
-        provider: 'PG Soft',
-        category: 'SLOTS',
-        sections: ['new'],
-        badge: 'NOVO',
-        multiplier: '2000x',
-        accent: '#2DC653',
-        gameUrl: 'https://public.pg-demo.com/games/play/?gid=45&lang=pt&currency=BRL',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Candy Superwin',
-        provider: 'PG Soft',
-        category: 'SLOTS',
-        sections: ['new'],
-        badge: 'NOVO',
-        multiplier: '3000x',
-        accent: '#FF85A1',
-        gameUrl: 'https://public.pg-demo.com/games/play/?gid=91&lang=pt&currency=BRL',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: '3 Pots of Wishes',
-        provider: 'Betsoft',
-        category: 'SLOTS',
-        sections: ['new'],
-        badge: 'NOVO',
-        multiplier: '1200x',
-        accent: '#7209B7',
-        gameUrl: 'https://betsoft.com/play-demo?id=7533',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'Dr. Jekyll & Mr. Hyde 2',
-        provider: 'Betsoft',
-        category: 'SLOTS',
-        sections: ['popular'],
-        badge: null,
-        multiplier: '800x',
-        accent: '#4A4E69',
-        gameUrl: 'https://betsoft.com/play-demo?id=7508',
-        imageUrl: null,
-        active: true,
-      },
-      {
-        title: 'The King of Social Media',
-        provider: 'Betsoft',
-        category: 'SLOTS',
-        sections: ['new'],
-        badge: 'NOVO',
-        multiplier: '1500x',
-        accent: '#FF9F1C',
-        gameUrl: 'https://betsoft.com/play-demo?id=7298',
-        imageUrl: null,
-        active: true,
-      },
-    ],
-    skipDuplicates: true,
-  })
+  for (const game of casinoGames) {
+    await prisma.casinoGame.upsert({
+      where: { title: game.title },
+      update: { gameUrl: game.gameUrl, active: game.active },
+      create: game,
+    })
+  }
 
-  await prisma.story.createMany({
-    data: [
-      {
-        title: '1 MILHÃO',
-        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.47.54.mp4',
-        order: 1,
-      },
-      {
-        title: 'COTAÇÕES',
-        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.03.mp4',
-        order: 2,
-      },
-      {
-        title: 'PRÊMIOS',
-        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.22.mp4',
-        order: 3,
-      },
-      {
-        title: 'CASHBACK',
-        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.23.mp4',
-        order: 4,
-      },
-      {
-        title: 'GRÁTIS',
-        videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.50.15.mp4',
-        order: 5,
-      },
-    ],
-    skipDuplicates: true,
-  })
+  const stories = [
+    {
+      title: '1 MILHÃO',
+      videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.47.54.mp4',
+      order: 1,
+    },
+    {
+      title: 'COTAÇÕES',
+      videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.03.mp4',
+      order: 2,
+    },
+    {
+      title: 'PRÊMIOS',
+      videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.22.mp4',
+      order: 3,
+    },
+    {
+      title: 'CASHBACK',
+      videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.48.23.mp4',
+      order: 4,
+    },
+    {
+      title: 'GRÁTIS',
+      videoUrl: 'https://igbxyvhkcaynscxmouyw.supabase.co/storage/v1/object/public/story-videos/WhatsApp%20Video%202026-03-25%20at%2023.50.15.mp4',
+      order: 5,
+    },
+  ]
+
+  // First, find existing stories avoiding duplicates
+  for (const story of stories) {
+    const existing = await prisma.story.findFirst({
+      where: { title: story.title },
+    })
+
+    if (existing) {
+      await prisma.story.update({
+        where: { id: existing.id },
+        data: story,
+      })
+    } else {
+      await prisma.story.create({
+        data: story,
+      })
+    }
+  }
 }
 
 main()

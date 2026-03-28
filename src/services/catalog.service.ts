@@ -1,4 +1,4 @@
-import { GameCategory } from '@prisma/client'
+import { GameCategory, Prisma } from '@prisma/client'
 import { prisma } from '../lib/prisma'
 
 const VALID_CATEGORIES = Object.values(GameCategory)
@@ -12,7 +12,7 @@ interface ListParams {
 }
 
 export async function listCasinoGames({ category, provider, section, page, limit }: ListParams) {
-  const where: Parameters<typeof prisma.casinoGame.findMany>[0]['where'] = { active: true }
+  const where: Prisma.CasinoGameWhereInput = { active: true }
 
   if (category) {
     const upper = category.toUpperCase() as GameCategory
